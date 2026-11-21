@@ -7,7 +7,7 @@ import Success from "./pages/success";
 import Contact from "./pages/contact";
 import Terms from "./pages/terms";
 import NotFound from "./pages/not-found";
-import Ads from "./pages/ads";
+import Ads from "./pages/my-ads";
 
 export default function App() {
   return (
@@ -24,7 +24,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/ads" element={<Ads />} />
+          <Route path="/my-ads" element={<Ads />} />
           <Route path="/editor/:id" element={<Editor />} />
           <Route path="/publish/:id" element={<Publish />} />
           <Route path="/success" element={<Success />} />

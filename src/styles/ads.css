@@ -1,7 +1,7 @@
 .editor-switch.square {
   display: grid;
   place-items: center;
-  width: 2.5rem;
+  width: 2rem;
   aspect-ratio: 1;
   padding: 0;
 }
@@ -14,7 +14,11 @@
   border-bottom: 1px solid var(--border);
 }
 
-.preview-header { font-style: italic; }
+.preview-header { 
+  font-style: italic; 
+  padding-bottom: 1.15rem;
+  color: var(--muted);
+}
 
 .editor-textarea {
   width: 100%;
@@ -26,3 +30,16 @@
 }
 
 .editor-textarea:focus-visible { outline: none; }
+
+.markdown-panel {
+  padding: var(--space-sm);
+  border: 1px solid var(--border);
+}
+
+.preview-body > :not(:last-child) {
+  margin-bottom: var(--space-md);
+}
+
+.city-button { 
+  text-align: left; 
+}

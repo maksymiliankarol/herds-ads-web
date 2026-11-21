@@ -15,7 +15,7 @@ export default function DateStep({ when, onChange, onNext }: Props) {
           onChange={(e) => onChange(e.target.value)}
         />
       </label>
-      <p>Your ad stays up for 7 days.</p>
+      <p className="muted">Your ad stays up for 7 days.</p>
       <button type="button" disabled={!when} onClick={onNext}>Next</button>
     </>
   );

@@ -5,7 +5,9 @@ export default function AdStep({ text, onNext }: { text: string; onNext: () => v
     <>
       <p>You're going to publish your ad:</p>
       <div className="column">
-        <Markdown text={text} />
+        <div className="markdown-panel">
+          <Markdown text={text} />
+        </div>
       </div>
       <button type="button" onClick={onNext}>Next</button>
     </>

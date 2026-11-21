@@ -1,6 +1,7 @@
 :root {
   --background: #fff;
   --foreground: #000;
+  --muted: #666666;
   --border: #c2c2c2;
   --surface: #e6e6e6;
   --link: #00f;
@@ -9,6 +10,7 @@
   --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
+  --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
   --space-lg: 2rem;
@@ -63,7 +65,7 @@ label {
 
 input {
   width: 100%;
-  padding: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
   font: inherit;
   border: 1px solid var(--border);
 }
@@ -76,7 +78,7 @@ input {
 /* ---------- Buttons ---------- */
 
 button {
-  padding: var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
   font: inherit;
   color: var(--background);
   background: var(--foreground);
@@ -106,6 +108,19 @@ button.link,
 }
 
 button.delete { background: var(--error); }
+
+/* Looks like a link */
+button.text {
+  padding: 0;
+  color: var(--link);
+  background: none;
+  text-decoration: underline;
+}
+
+button.text:hover {
+  opacity: 1;
+  text-decoration-thickness: 2px;
+}
 
 /* ---------- Tables ---------- */
 
@@ -202,4 +217,5 @@ td > table td {
 
 /* ---------- Misc ---------- */
 
+.muted { color: var(--muted); }
 .error { color: var(--error); }

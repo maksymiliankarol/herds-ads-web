@@ -6,6 +6,13 @@ import { bullets, link, wrap, type Edit } from "../lib/editing";
 
 const MAX_LENGTH = 5000;
 
+const PLACEHOLDER = `**Summer Jazz Night** at Kraków Rynek!
+Live music, food trucks and good vibes.
+
+- Friday, 8 PM
+
+Get tickets [here](https://example.com).`;
+
 export default function Editor() {
   const { id } = useParams();
   // key resets the state when the id changes
@@ -39,9 +46,7 @@ function EditorView({ id }: { id: string }) {
 
   return (
     <section className="page width-lg column noscroll">
-      <nav>
-        <Link to="/ads">Back</Link>
-      </nav>
+      <nav><Link to="/my-ads">Back</Link></nav>
       <nav>
         <button
           type="button"
@@ -80,7 +85,7 @@ function EditorView({ id }: { id: string }) {
         <div className="panel is-active">
           <div className="editor-input">
             <input 
-              placeholder="My title..." 
+              placeholder="Summer Jazz Night" 
               maxLength={100}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -89,7 +94,7 @@ function EditorView({ id }: { id: string }) {
           <textarea
             ref={area}
             className="editor-textarea"
-            placeholder="Write here..."
+            placeholder={PLACEHOLDER}
             maxLength={MAX_LENGTH}
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -99,7 +104,7 @@ function EditorView({ id }: { id: string }) {
           <div className="preview-header">
             <p>Preview</p>
           </div>
-          <div className="scroll">
+          <div className="scroll preview-body">
             <Markdown text={text} />
           </div>
         </div>

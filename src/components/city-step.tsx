@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { get } from "../api";
 import type { City } from "../lib/publish";
 
@@ -7,7 +7,7 @@ export default function CityStep({ onPick }: { onPick: (city: City) => void }) {
   const [cities, setCities] = useState<City[] | null>(null);
   const [error, setError] = useState("");
 
-  async function search(e: FormEvent) {
+  async function search(e: SubmitEvent) {
     e.preventDefault();
     const q = query.trim();
     if (!q) return;
@@ -31,15 +31,18 @@ export default function CityStep({ onPick }: { onPick: (city: City) => void }) {
       {error && <p className="error">{error}</p>}
       {cities?.length === 0 && <p>No cities found</p>}
       {cities && cities.length > 0 && (
-        <ul>
+        <div className="column gap-sm">
           {cities.map((c) => (
-            <li key={c.id}>
-              <button type="button" onClick={() => onPick(c)}>
-                {c.title} ({c.country_code})
-              </button>
-            </li>
+            <button 
+              key={c.id}
+              type="button" 
+              onClick={() => onPick(c)}
+              className="city-button secondary"
+            >
+              {c.title} ({c.country_code})
+            </button>
           ))}
-        </ul>
+        </div>
       )}
     </>
   );

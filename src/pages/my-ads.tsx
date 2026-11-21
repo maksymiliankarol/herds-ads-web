@@ -13,7 +13,7 @@ export default function Ads() {
 
   return (
     <section className="page width-lg column">
-      <Link to="/">Back</Link>
+      <nav><Link to="/">Back</Link></nav>
       <p>Your ads.</p>
       {ads.length === 0 ? (
         <p></p>

@@ -4,11 +4,15 @@ const PENDING = "herds-pending"; // sessionStorage: the publication being paid f
 // at = go-live time in ms
 export type Publication = { city: string; room: string; at: number };
 export type Ad = { id: string; title: string; text: string; updated: number; published: Publication[] };
+type Pending = Publication & { adId: string };
 
 const isPublication = (p: unknown): p is Publication =>
   typeof (p as Publication)?.city === "string" &&
   typeof (p as Publication).room === "string" &&
   typeof (p as Publication).at === "number";
+
+const isPending = (p: unknown): p is Pending =>
+  typeof (p as Pending)?.adId === "string" && isPublication(p);
 
 // localStorage can hold anything (or be edited by hand), so keep only well-formed entries
 function read(): Ad[] {
@@ -69,7 +73,7 @@ export function finishPublish() {
   try {
     const pending = JSON.parse(sessionStorage.getItem(PENDING) ?? "null");
     cancelPublish();
-    if (typeof pending?.adId !== "string" || !isPublication(pending)) return;
+    if (!isPending(pending)) return;
 
     const { adId, city, room, at } = pending;
     write(read().map((a) => (a.id === adId ? { ...a, published: [...a.published, { city, room, at }] } : a)));

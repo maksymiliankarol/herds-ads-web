@@ -14,7 +14,7 @@ export default function Success() {
   return (
     <section className="page width-sm column">
       <p>{cancelled ? "Payment cancelled. You were not charged." : "Payment received. Your ad is scheduled."}</p>
-      <Link to="/ads">Back to my ads</Link>
+      <Link to="/my-ads">Back to my ads</Link>
     </section>
   );
 }

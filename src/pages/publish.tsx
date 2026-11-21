@@ -8,7 +8,6 @@ import RoomStep from "../components/room-step";
 import DateStep from "../components/date-step";
 import PayStep from "../components/pay-step";
 
-
 const STEPS = 5;
 
 export default function Publish() {
@@ -22,7 +21,7 @@ export default function Publish() {
   if (!ad?.text.trim()) {
     return (
       <section className="page width-sm column">
-        <Link to="/ads">Back</Link>
+        <nav><Link to="/my-ads">Back</Link></nav>
         <p>Nothing to publish. Write something first.</p>
       </section>
     );
@@ -31,11 +30,19 @@ export default function Publish() {
   return (
     <section className="page width-sm column">
       {step === 0 ? (
-        <Link to="/ads">Back</Link>
+        <nav><Link to="/my-ads">Back</Link></nav>
       ) : (
-        <button type="button" onClick={() => setStep(step - 1)}>Back</button>
+        <nav>
+          <button 
+            type="button" 
+            onClick={() => setStep(step - 1)}
+            className="text"
+          >
+            Back
+          </button>
+        </nav>
       )}
-      <small>Step {step + 1} of {STEPS}</small>
+      <p className="muted">Step {step + 1} of {STEPS}</p>
 
       {step === 0 && <AdStep text={ad.text} onNext={() => setStep(1)} />}
       {step === 1 && (

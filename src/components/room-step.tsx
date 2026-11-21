@@ -24,13 +24,18 @@ export default function RoomStep({ city, onPick }: Props) {
       {error && <p className="error">{error}</p>}
       {!rooms && !error && <p>Loading...</p>}
       {rooms?.length === 0 && <p>No rooms yet</p>}
-      <ul>
+      <div className="column">
         {rooms?.map((r) => (
-          <li key={r.id}>
-            <button type="button" onClick={() => onPick(r)}>{roomName(r.title)}</button>
-          </li>
+          <button 
+            key={r.id}
+            type="button" 
+            onClick={() => onPick(r)}
+            className="city-button secondary"
+          >
+            {roomName(r.title)}
+          </button>
         ))}
-      </ul>
+      </div>
     </>
   );
 }

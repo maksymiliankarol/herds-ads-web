@@ -13,7 +13,7 @@ export default function PayStep({ adId, content, city, room, when }: Props) {
     setBusy(true);
     setError("");
     try {
-      const { url } = await post<{ url: string }>("/ads", {
+      const { url } = await post<{ url: string }>("/my-ads", {
         content,
         room_id: room.id,
         publish_at: new Date(when).toISOString(),

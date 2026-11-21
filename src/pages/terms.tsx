@@ -1,6 +1,5 @@
 import { Link } from "react-router";
 
-// TODO: Create real ads specific articles on main website and link them here
 const articles = [
   {
     title: "Terms of Service",
@@ -15,7 +14,7 @@ const articles = [
 export default function Terms() {
   return (
     <section className="page width-sm column">
-      <Link to="/">Back</Link>
+      <nav><Link to="/">Back</Link></nav>
       <p>Terms and policies</p>
       <ul>
         {articles.map((article) => (
