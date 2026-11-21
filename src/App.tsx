@@ -1,13 +1,11 @@
 import { Link, Route, Routes } from "react-router";
 import logo from "./assets/logo.svg";
 import Home from "./pages/home";
-import Editor from "./pages/editor";
-import Publish from "./pages/publish";
 import Success from "./pages/success";
 import Contact from "./pages/contact";
 import Terms from "./pages/terms";
 import NotFound from "./pages/not-found";
-import Ads from "./pages/my-ads";
+import NewAd from "./pages/new-ad";
 
 export default function App() {
   return (
@@ -24,9 +22,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/my-ads" element={<Ads />} />
-          <Route path="/editor/:id" element={<Editor />} />
-          <Route path="/publish/:id" element={<Publish />} />
+          <Route path="/new-ad" element={<NewAd />} />
           <Route path="/success" element={<Success />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms" element={<Terms />} />

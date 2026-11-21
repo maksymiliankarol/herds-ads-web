@@ -1,22 +1,31 @@
-import { DAY, toInput } from "../lib/publish";
+import { useState } from "react";
+import { PUBLISH_HOUR_UTC, publishSlots } from "../lib/publish";
 
-type Props = { when: string; onChange: (when: string) => void; onNext: () => void };
+// Shown in UTC so the date always matches the go-live instant
+const formatDay = (d: Date) =>
+  d.toLocaleDateString(undefined, { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
 
-export default function DateStep({ when, onChange, onNext }: Props) {
+const HOUR_LABEL = `${String(PUBLISH_HOUR_UTC).padStart(2, "0")}:00 UTC`;
+
+export default function DateStep({ onPick }: { onPick: (when: string) => void }) {
+  const [slots] = useState(publishSlots);
+  const [selected, setSelected] = useState<string | null>(null);
+
   return (
     <>
-      <label>
-        Goes live
-        <input
-          type="datetime-local"
-          value={when}
-          min={toInput(new Date())}
-          max={toInput(new Date(Date.now() + 89 * DAY))} // the API allows 90
-          onChange={(e) => onChange(e.target.value)}
-        />
-      </label>
-      <p className="muted">Your ad stays up for 7 days.</p>
-      <button type="button" disabled={!when} onClick={onNext}>Next</button>
+      <fieldset className="radio-list">
+        <legend>Goes live at {HOUR_LABEL}</legend>
+        {slots.map((d) => {
+          const iso = d.toISOString();
+          return (
+            <label key={iso} className="radio">
+              <input type="radio" name="date" checked={iso === selected} onChange={() => setSelected(iso)} />
+              {formatDay(d)}
+            </label>
+          );
+        })}
+      </fieldset>
+      <button type="button" disabled={!selected} onClick={() => selected && onPick(selected)}>Next</button>
     </>
   );
 }

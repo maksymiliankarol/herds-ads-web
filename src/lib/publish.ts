@@ -4,14 +4,20 @@ export type City = { id: number; title: string; country_code: string };
 export type Room = { id: number; title: string };
 
 export const PRICE = "$5.00"; // keep in sync with AD_PRICE in the API
-export const MINUTE = 60_000;
-export const DAY = 24 * 60 * MINUTE;
 
-// <input type="datetime-local"> wants local time as YYYY-MM-DDTHH:mm
-export const toInput = (d: Date) =>
-  new Date(d.getTime() - d.getTimezoneOffset() * MINUTE).toISOString().slice(0, 16);
+const HOUR = 60 * 60_000;
+const DAY = 24 * HOUR;
 
-// The API rejects past dates, so default to a few minutes ahead
-export const defaultWhen = () => toInput(new Date(Date.now() + 10 * MINUTE));
+// Every ad goes live at this hour (UTC); the API cron publishes it within 30 minutes
+export const PUBLISH_HOUR_UTC = 8;
+export const AD_LIFETIME = 7 * DAY;
+
+// The next 7 go-live times. Today counts only if it is still at least an hour away,
+// so the API (which rejects past dates) never sees a stale pick
+export function publishSlots(now = new Date()): Date[] {
+  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), PUBLISH_HOUR_UTC);
+  const start = today - now.getTime() >= HOUR ? today : today + DAY;
+  return Array.from({ length: 7 }, (_, i) => new Date(start + i * DAY));
+}
 
 export const roomName = (title: string) => title.split("_").map(capitalize).join(" / ");
