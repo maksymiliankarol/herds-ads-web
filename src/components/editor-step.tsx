@@ -37,7 +37,7 @@ export default function EditorStep({ text, onChange, onNext }: Props) {
       <small className="muted">Step 1 of 5</small>
       <div className="grid-two">
         <div className="panel is-active">
-          <div className="preview-header"><p>Markdown Editor</p></div>
+          <div className="preview-header"><p>Editor</p></div>
           <nav className="editor-toolbar">
             <button type="button" aria-label="Bold" className="editor-switch square" onClick={() => apply((t, s, e) => wrap(t, s, e, "**", "bold"))}>
               <strong>B</strong>

@@ -2,6 +2,8 @@ import { Link } from "react-router"
 
 const links = [
   { to: "/new-ad", label: "New ad" },
+  { to: "/savoir-vivre", label: "Savoir vivre" },
+  { to: "/editor-guide", label: "Editor guide" },
   { to: "/contact", label: "Contact" },
   { to: "/terms", label: "Terms" }
 ]

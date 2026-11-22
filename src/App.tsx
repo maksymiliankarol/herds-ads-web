@@ -6,6 +6,8 @@ import Contact from "./pages/contact";
 import Terms from "./pages/terms";
 import NotFound from "./pages/not-found";
 import NewAd from "./pages/new-ad";
+import SavoirVivre from "./pages/savoir-vivre";
+import EditorGuide from "./pages/editor-guide";
 
 export default function App() {
   return (
@@ -23,6 +25,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new-ad" element={<NewAd />} />
+          <Route path="/savoir-vivre" element={<SavoirVivre />} />
+          <Route path="/editor-guide" element={<EditorGuide />} />
           <Route path="/success" element={<Success />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/terms" element={<Terms />} />

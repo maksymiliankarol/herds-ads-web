@@ -38,3 +38,8 @@
 .city-button { 
   text-align: left; 
 }
+
+.savoir-card {
+  padding: var(--space-md);
+  border: 1px solid var(--border);
+}
