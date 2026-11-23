@@ -53,12 +53,16 @@ export default function NewAd() {
         </div>
 
         <div className="column" hidden={step !== 3}>
-          <DateStep
-            onPick={(w) => {
-              setWhen(w);
-              setStep(4);
-            }}
-          />
+          {room && (
+            <DateStep
+              key={room.id}
+              roomId={room.id}
+              onPick={(w) => {
+                setWhen(w);
+                setStep(4);
+              }}
+            />
+          )}
         </div>
 
         {step === 4 && city && room && when && (

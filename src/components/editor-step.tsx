@@ -1,9 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Markdown from "./markdown";
 import { bullets, link, wrap, type Edit } from "../lib/editing";
 import { Link } from "react-router";
-
-const MAX_LENGTH = 5000;
+import { AD_MAX_LENGTH, AD_MIN_LENGTH } from "../lib/publish";
+import { capitalize } from "../lib/format";
 
 const PLACEHOLDER = `**Summer Jazz Night** at Kraków Rynek!
 Live music, food trucks and good vibes.
@@ -16,13 +16,15 @@ type Props = { text: string; onChange: (text: string) => void; onNext: () => voi
 
 export default function EditorStep({ text, onChange, onNext }: Props) {
   const area = useRef<HTMLTextAreaElement>(null);
+  const [view, setView] = useState<"editor" | "preview">("editor"); // mobile only
+  const length = text.trim().length; // the API validates the trimmed text
 
   function apply(edit: (text: string, start: number, end: number) => Edit) {
     const el = area.current;
     if (!el) return;
 
     const next = edit(text, el.selectionStart, el.selectionEnd);
-    if (next.text.length > MAX_LENGTH) return; // maxLength doesn't apply to programmatic changes
+    if (next.text.length > AD_MAX_LENGTH) return; // maxLength doesn't apply to programmatic changes
 
     onChange(next.text);
     requestAnimationFrame(() => {
@@ -35,9 +37,23 @@ export default function EditorStep({ text, onChange, onNext }: Props) {
     <section className="page width-lg column noscroll">
       <nav><Link to="/">Back</Link></nav>
       <small className="muted">Step 1 of 5</small>
+      <nav className="view-nav">
+        {(["editor", "preview"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            className={`view-switch${view === v ? " active" : ""}`}
+            onClick={() => setView(v)}
+          >
+            {capitalize(v)}
+          </button>
+        ))}
+      </nav>
       <div className="grid-two">
-        <div className="panel is-active">
-          <div className="preview-header"><p>Editor</p></div>
+        <div className={`panel${view === "editor" ? " is-active" : ""}`}>          <div className="preview-header">
+            <p>Editor</p>
+            <small className="muted">{length} / {AD_MAX_LENGTH} (min {AD_MIN_LENGTH})</small>
+          </div>
           <nav className="editor-toolbar">
             <button type="button" aria-label="Bold" className="editor-switch square" onClick={() => apply((t, s, e) => wrap(t, s, e, "**", "bold"))}>
               <strong>B</strong>
@@ -56,19 +72,24 @@ export default function EditorStep({ text, onChange, onNext }: Props) {
             ref={area}
             className="editor-textarea"
             placeholder={PLACEHOLDER}
-            maxLength={MAX_LENGTH}
+            maxLength={AD_MAX_LENGTH}
             value={text}
             onChange={(e) => onChange(e.target.value)}
           />
         </div>
-        <div className="panel">
-          <div className="preview-header"><p>Preview</p></div>
+        <div className={`panel${view === "preview" ? " is-active" : ""}`}>          <div className="preview-header"><p>Preview</p></div>
           <div className="scroll preview-body">
             <Markdown text={text} />
           </div>
         </div>
       </div>
-      <button type="button" disabled={!text.trim()} onClick={onNext}>Next</button>
+      <button 
+        type="button" 
+        disabled={length < AD_MIN_LENGTH} 
+        onClick={onNext}
+      >
+        Next
+      </button>    
     </section>
   );
 }

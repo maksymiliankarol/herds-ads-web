@@ -76,6 +76,37 @@ ol { list-style: decimal; }
   padding-left: var(--space-lg);
 }
 
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+/* Inline code */
+:not(pre) > code,
+kbd,
+samp {
+  padding: 0.05rem 0.25rem;
+  border: 1px solid var(--border);
+}
+
+/* Code blocks */
+pre {
+  padding: var(--space-sm);
+  overflow-x: auto;
+  background: var(--foreground) !important;
+}
+
+pre code {
+  padding: 0;
+}
+
+:not(pre) > code {
+  overflow-wrap: anywhere;
+}
+
 label {
   display: flex;
   flex-direction: column;
