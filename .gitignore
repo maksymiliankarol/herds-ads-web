@@ -15,6 +15,9 @@ dist-ssr
 # Wrangler
 .wrangler
 
+# Private
+TODO.md
+
 # Env
 .env.development
 
