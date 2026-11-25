@@ -6,6 +6,7 @@ export default function Success() {
   return (
     <section className="page width-sm column">
       <nav><Link to="/">Back</Link></nav>
+      <h1>{cancelled ? "Canceled" : "Success!"}</h1>
       <p>{cancelled ? "Payment cancelled. You were not charged." : "Payment received. Your ad is scheduled."}</p>
     </section>
   );

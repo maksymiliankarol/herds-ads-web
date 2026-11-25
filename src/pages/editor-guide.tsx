@@ -4,6 +4,7 @@ export default function EditorGuide() {
   return (
     <section className="page width-md column">
       <nav><Link to="/">Back</Link></nav>
+      <h1>Editor Guide</h1>
       <p>Editor uses markdown formatting. It&apos;s really simple, take a look:</p>
       <ul>
         <li>Write <code>Text</code>, to get &quot;Text&quot;</li>

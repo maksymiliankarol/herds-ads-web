@@ -4,6 +4,7 @@ export default function SavoirVivre() {
   return (
     <section className="page width-md column">
       <nav><Link to="/">Back</Link></nav>
+      <h1>Savoir Vivre</h1>
       <p>
         Here&apos;s what we consider a good ad and what we consider a bad one.
         {" "}We hope you&apos;ll publish a good one. It&apos;s a matter of taste.
