@@ -1,13 +1,14 @@
 import { Link, Route, Routes } from "react-router";
 import logo from "./assets/logo.svg";
 import Home from "./pages/home";
-import Success from "./pages/success";
-import Contact from "./pages/contact";
-import NotFound from "./pages/not-found";
 import NewAd from "./pages/new-ad";
 import SavoirVivre from "./pages/savoir-vivre";
 import EditorGuide from "./pages/editor-guide";
+import Settings from "./pages/settings";
+import Success from "./pages/success";
+import Contact from "./pages/contact";
 import Legal from "./pages/legal";
+import NotFound from "./pages/not-found";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/new-ad" element={<NewAd />} />
           <Route path="/savoir-vivre" element={<SavoirVivre />} />
           <Route path="/editor-guide" element={<EditorGuide />} />
+          <Route path="/settings" element={<Settings />} />
           <Route path="/success" element={<Success />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/legal" element={<Legal />} />
