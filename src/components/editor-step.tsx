@@ -84,7 +84,8 @@ export default function EditorStep({ text, onChange, onNext }: Props) {
         </div>
       </div>
       <button 
-        type="button" 
+        type="button"
+        className="" 
         disabled={length < AD_MIN_LENGTH} 
         onClick={onNext}
       >

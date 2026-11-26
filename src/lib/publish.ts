@@ -2,8 +2,7 @@ import { capitalize } from "./format";
 
 export type City = { id: number; title: string; country_code: string };
 export type Room = { id: number; title: string };
-
-export const PRICE = "$5.00"; // keep in sync with AD_PRICE in the API
+export type Price = { amount: number; currency: string };
 
 const HOUR = 60 * 60_000;
 const DAY = 24 * HOUR;
@@ -23,3 +22,6 @@ export function publishSlots(now = new Date()): Date[] {
 }
 
 export const roomName = (title: string) => title.split("_").map(capitalize).join(" / ");
+
+export const formatPrice = ({ amount, currency }: Price) =>
+  new Intl.NumberFormat(undefined, { style: "currency", currency }).format(amount / 100);
