@@ -3,12 +3,13 @@ import { get, post } from "../api";
 import { AD_LIFETIME, formatPrice, roomName, type City, type Price, type Room } from "../lib/publish";
 import { formatUtc } from "../lib/format";
 
-type Props = { content: string; city: City; room: Room; when: string };
+type Props = { content: string; url: string; urlText: string; city: City; room: Room; when: string };
 
-export default function PayStep({ content, city, room, when }: Props) {
+export default function PayStep({ content, url, urlText, city, room, when }: Props) {
   const [price, setPrice] = useState<Price | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const ctrl = new AbortController();
@@ -26,14 +27,16 @@ export default function PayStep({ content, city, room, when }: Props) {
     setBusy(true);
     setError("");
     try {
-      const { url } = await post<{ url: string }>("/ads", {
+      const { url: checkoutUrl } = await post<{ url: string }>("/ads", {
         content,
+        url,
+        url_text: urlText,
         room_id: room.id,
         publish_at: when,
       });
       // Only ever send the browser to Stripe's checkout
-      if (new URL(url).origin !== "https://checkout.stripe.com") throw new Error("Unexpected payment URL");
-      window.location.assign(url);
+      if (new URL(checkoutUrl).origin !== "https://checkout.stripe.com") throw new Error("Unexpected payment URL");
+      window.location.assign(checkoutUrl);
     } catch (e) {
       setError((e as Error).message);
       setBusy(false);
@@ -42,6 +45,23 @@ export default function PayStep({ content, city, room, when }: Props) {
 
   return (
     <>
+      <div className="column gap-sm">
+        <p>Preview</p>
+        <aside className="pinned-ad expandable column" onClick={() => setExpanded((e) => !e)}>
+          <small className="muted">Sponsored</small>
+          <button type="button" className="pinned-ad-toggle" aria-expanded={expanded}>
+            <span className={expanded ? "pinned-ad-text expanded" : "pinned-ad-text"}>{content}</span>
+          </button>
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer nofollow sponsored"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {urlText}
+          </a>
+        </aside>
+      </div>
       <div className="column gap-sm">
         <p>Summary</p>
         <ul>
@@ -52,6 +72,7 @@ export default function PayStep({ content, city, room, when }: Props) {
           <li>Price: {label}</li>
         </ul>
       </div>
+
       {error && <p className="error">{error}</p>}
       <button type="button" disabled={busy || !price} onClick={pay}>
         {busy ? "Redirecting..." : `Pay - ${label}`}

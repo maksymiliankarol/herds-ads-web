@@ -129,15 +129,20 @@ pre code {
 label {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
 }
 
-input {
+input,
+textarea {
   width: 100%;
   padding: var(--space-xs) var(--space-sm);
   font: inherit;
   border: 1px solid var(--border);
   background: var(--background);
+}
+
+textarea {
+  resize: none;
 }
 
 :focus-visible {
@@ -153,12 +158,14 @@ input {
   gap: var(--space-sm);
 }
 
-.radio-list legend { margin-bottom: var(--space-sm); }
+.radio-list legend { margin-bottom: var(--space-sm);  }
 
 /* A whole row is the click target; the selected one is highlighted */
 .radio {
   flex-direction: row;
   align-items: center;
+  gap: var(--space-sm);
+  padding-left: .1rem;
 }
 
 .radio:has(input:checked) {
@@ -302,7 +309,7 @@ button.text:hover {
 @media (max-width: 768px) {
   .view-nav {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
 
   .grid-two { grid-template-columns: minmax(0, 1fr); }

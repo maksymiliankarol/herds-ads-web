@@ -1,51 +1,50 @@
-.editor-switch.square {
-  display: grid;
-  place-items: center;
-  width: 2rem;
-  aspect-ratio: 1;
-  padding: 0;
-}
-
-.editor-toolbar {
-  display: flex;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
-  border-bottom: 1px solid var(--border);
-}
-
-.preview-header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  padding: var(--space-sm);
-  border-bottom: 1px solid var(--border);
-}
-
-.preview-header small {
-  margin-left: auto;
-}
-
-.editor-textarea {
-  width: 100%;
-  height: 100%;
-  padding: var(--space-sm);
-  font: inherit;
-  border: none;
-  resize: none;
-  background: var(--background);
-}
-
-.editor-textarea:focus-visible { outline: none; }
-
-.preview-body > :not(:last-child) {
-  margin-bottom: var(--space-md);
-}
-
-.city-button { 
-  text-align: left; 
-}
-
 .savoir-card {
   padding: var(--space-md);
   border: 1px solid var(--border);
+}
+
+/* Same look as the pinned ad in herds-web */
+.pinned-ad {
+  padding: var(--space-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow-wrap: anywhere;
+  gap: var(--space-sm);
+}
+
+.pinned-ad.expandable {
+  cursor: pointer;
+}
+
+/* A flex item stretches by default; keep the link as wide as its text */
+.pinned-ad > a {
+  align-self: flex-start;
+}
+
+/* Plain text that is still a real button (keyboard and screen readers) */
+.pinned-ad-toggle {
+  align-self: stretch;
+  padding: 0;
+  color: inherit;
+  background: none;
+  text-align: left;
+}
+
+.pinned-ad-toggle:hover {
+  opacity: 1;
+}
+
+/* 2 lines, on every screen size */
+.pinned-ad-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.pinned-ad-text.expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
 }

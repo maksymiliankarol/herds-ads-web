@@ -13,12 +13,8 @@ export default function SavoirVivre() {
         <strong>Bad</strong>
         <p className="savoir-card">
           <i>
-            🔥🔥🔥 JAZZ!!! ONLY TODAY!!! 🔥🔥🔥<br />
-            YOU CAN&apos;T MISS THIS!!! BEST CONCERT EVER IN KRAKÓW!!!<br />
-            RYNEK!!! 7:30PM!!! BE THERE OR BE SQUARE!!!<br />
-            ❗❗❗ LIMITED SPACE ❗❗❗<br />
-            HURRY!!! SHARE WITH 10 FRIENDS!!! NEVER AGAIN!!!<br />
-            🎷🎷🎷 CLICK NOW!!! 🎷🎷🎷
+            🔥🔥🔥 JAZZ!!! ONLY TODAY!!! 🔥🔥🔥 YOU CAN&apos;T MISS THIS!!! BEST CONCERT EVER IN KRAKÓW!!!
+            RYNEK!!! 7:30PM!!! BE THERE OR BE SQUARE!!!
           </i>
         </p>
       </div>
@@ -26,15 +22,8 @@ export default function SavoirVivre() {
         <strong>Good</strong>
         <p className="savoir-card">
           <i>
-            Jazz at the Rynek<br />
-            An evening under the Town Hall Tower<br />
-            <br />
-            Saturday, 14 June, 7:30 pm<br />
-            Main Square, Kraków<br />
-            <br />
-            The Kraków Jazz Quartet plays standards and originals as the sun
-            sets over the Cloth Hall. Bring a friend, find a seat on the steps,
-            and let the music do the rest. Free entry.<br />
+            Jazz at the Rynek, Saturday 14 June, 7:30 pm. The Kraków Jazz Quartet plays
+            standards and originals under the Town Hall Tower. Free entry.
           </i>
         </p>
       </div>
